@@ -1,0 +1,20 @@
+<?php
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $psw = $_POST['psw'];
+    $rpsw = $_POST['rpsw'];
+
+    //Database Connection
+    $conn = new mysqli('localhost','root','','login');
+    if($conn->connect_error){
+       die('Connection Failed : '.$conn->connect_error);
+    }else{
+         $stmt = $conn->prepare("insert into signup(name,email,phone,psw,rpsw)values(?,?,?,?,?)");
+         $stmt->bind_param("ssiss",$name,$email,$phone,$psw,$rpsw);
+         $stmt->execute();
+         echo "Logged in Successfully";
+         $stmt->close();
+         $stmt->close();
+}
+?>

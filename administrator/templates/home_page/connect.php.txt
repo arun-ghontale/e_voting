@@ -1,0 +1,17 @@
+<?php
+    $pname = $_POST['pname'];
+    $psw = $_POST['psw'];
+
+    //Database Connection
+    $conn = new mysqli('localhost','root','','login');
+    if($conn->connect_error){
+       die('Connection Failed : '.$conn->connect_error);
+    }else{
+         $stmt = $conn->prepare("insert into login(pname,psw)values(?,?)");
+         $stmt->bind_param("is",$pname,$psw);
+         $stmt->execute();
+         echo "Logged in Successfully";
+         $stmt->close();
+         $stmt->close();
+}
+?>
